@@ -25,6 +25,7 @@ mv wp-content/plugins/wp2static wp-content/plugins/wordpress-static-html-plugin
 $WPCLI plugin activate wordpress-static-html-plugin
 
 # set options for Netlify deploy
+$WPCLI wp2static options selected_deployment_option 'netlify'
 $WPCLI wp2static options netlifySiteID $NETLIFYSITEID
 $WPCLI wp2static options netlifyPersonalAccessToken $NETLIFYACCESSTOKEN
 $WPCLI wp2static options baseUrl https://$NETLIFYSITEID
