@@ -16,7 +16,8 @@ function build_and_deploy {
   WPCLI="$(which wp) $WPCMDAPPEND"
 
   # remove previous version, while preserving settings.
-  $WPCLI plugin deactivate --uninstall wordpress-static-html-plugin
+  # TODO: returns error code 1 if fails, need to avoid that or CRON chokes
+  #$WPCLI plugin deactivate --uninstall wordpress-static-html-plugin
 
   # rm plugin dir if exists
   rm -Rf $WPDIR/wp-content/plugins/wp2static
