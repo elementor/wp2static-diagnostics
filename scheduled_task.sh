@@ -70,7 +70,10 @@ function build_and_deploy {
 
 # look for a lastknowncommit file in $HOME
 if [ ! -f $HOME/last_commit ]; then
-    echo "No commit history found, running build and deploy"
+    echo "No commit history found, saving latest commit & running build and deploy"
+
+    curl -i "https://api.github.com/repos/leonstafford/wp2static/commits/HEAD" 2>/dev/null | grep sha | head -n 1 > $HOME/last_commit
+
     build_and_deploy
     exit 0
 else
