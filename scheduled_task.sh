@@ -3,6 +3,10 @@
 # generate a static site copy and deploy to Netlify
 function build_and_deploy {
   # exit 1 # DEBUG
+
+  # change to this script's dir
+  cd "${0%/*}"
+
   . ./.env
 
   cd $WP2STATICSCRIPTSDIR
