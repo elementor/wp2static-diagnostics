@@ -4,9 +4,6 @@
 
 . ./.env
 
-env | grep NETLIFY
-
-exit 1
 
 # remove previous version, while preserving settings.
 wp plugin deactivate --uninstall wordpress-static-html-plugin
@@ -21,8 +18,13 @@ mv wp-content/plugins/wp2static wp-content/plugins/wordpress-static-html-plugin
 wp plugin activate wordpress-static-html-plugin
 
 # set options for Netlify deploy
-
-
+wp wp2static option netlifySiteID $NETLIFYSITEID
+wp wp2static option netlifyPersonalAccessToken $NETLIFYACCESSTOKEN
+wp wp2static option baseUrl https://$NETLIFYSITEID
+wp wp2static option baseUrl-netlify https://$NETLIFYSITEID
+wp wp2static option useBasicAuth $USEBASICAUTH
+wp wp2static option basicAuthUser $BASICAUTHUSER
+wp wp2static option basicAuthPassword $BASICAUTHPASS
 
 # quick test
 wp wp2static diagnostics
