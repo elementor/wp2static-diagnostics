@@ -24,6 +24,9 @@ mv wp-content/plugins/wp2static wp-content/plugins/wordpress-static-html-plugin
 # activate the renamed plugin
 $WPCLI plugin activate wordpress-static-html-plugin
 
+# install PowerPack
+cp wp-content/plugins/wordpress-static-html-plugin/provisioning/deployment_modules/* wp-content/plugins/wordpress-static-html-plugin/powerpack/
+
 # set options for Netlify deploy
 $WPCLI wp2static options set selected_deployment_option 'netlify'
 $WPCLI wp2static options set netlifySiteID $NETLIFYSITEID
