@@ -1,62 +1,94 @@
 #!/bin/bash
-. ./.env
 
-cd $WP2STATICSCRIPTSDIR
+# generate a static site copy and deploy to Netlify
+function build_and_deploy {
+  # exit 1 # DEBUG
+  . ./.env
 
-# read deploy key and site url from env vars
+  cd $WP2STATICSCRIPTSDIR
 
-cd $WPDIR
+  # read deploy key and site url from env vars
 
-WPCLI="$(which wp) $WPCMDAPPEND"
+  cd $WPDIR
 
-# remove previous version, while preserving settings.
-$WPCLI plugin deactivate --uninstall wordpress-static-html-plugin
+  WPCLI="$(which wp) $WPCMDAPPEND"
 
-# rm plugin dir if exists
-rm -Rf $WPDIR/wp-content/plugins/wp2static
+  # remove previous version, while preserving settings.
+  $WPCLI plugin deactivate --uninstall wordpress-static-html-plugin
 
-# install latest development version
-$WPCLI plugin install https://github.com/leonstafford/wp2static/archive/master.zip
+  # rm plugin dir if exists
+  rm -Rf $WPDIR/wp-content/plugins/wp2static
 
-# rename folder for correct plugin slug
-mv wp-content/plugins/wp2static wp-content/plugins/wordpress-static-html-plugin
+  # install latest development version
+  $WPCLI plugin install https://github.com/leonstafford/wp2static/archive/master.zip
 
-# activate the renamed plugin
-$WPCLI plugin activate wordpress-static-html-plugin
+  # rename folder for correct plugin slug
+  mv wp-content/plugins/wp2static wp-content/plugins/wordpress-static-html-plugin
 
-# install PowerPack
-mkdir -p wp-content/plugins/wordpress-static-html-plugin/powerpack/
+  # activate the renamed plugin
+  $WPCLI plugin activate wordpress-static-html-plugin
 
-cp wp-content/plugins/wordpress-static-html-plugin/provisioning/deployment_modules/* wp-content/plugins/wordpress-static-html-plugin/powerpack/
+  # install PowerPack
+  mkdir -p wp-content/plugins/wordpress-static-html-plugin/powerpack/
 
-# set options for Netlify deploy
-$WPCLI wp2static options set selected_deployment_option 'netlify'
-$WPCLI wp2static options set netlifySiteID $NETLIFYSITEID
-$WPCLI wp2static options set netlifyPersonalAccessToken $NETLIFYACCESSTOKEN
-$WPCLI wp2static options set baseUrl https://$NETLIFYSITEID
-$WPCLI wp2static options set baseUrl-netlify https://$NETLIFYSITEID
-$WPCLI wp2static options set useBasicAuth $USEBASICAUTH
-$WPCLI wp2static options set basicAuthUser $BASICAUTHUSER
-$WPCLI wp2static options set basicAuthPassword $BASICAUTHPASS
+  cp wp-content/plugins/wordpress-static-html-plugin/provisioning/deployment_modules/* wp-content/plugins/wordpress-static-html-plugin/powerpack/
 
-# quick test
-$WPCLI wp2static diagnostics
+  # set options for Netlify deploy
+  $WPCLI wp2static options set selected_deployment_option 'netlify'
+  $WPCLI wp2static options set netlifySiteID $NETLIFYSITEID
+  $WPCLI wp2static options set netlifyPersonalAccessToken $NETLIFYACCESSTOKEN
+  $WPCLI wp2static options set baseUrl https://$NETLIFYSITEID
+  $WPCLI wp2static options set baseUrl-netlify https://$NETLIFYSITEID
+  $WPCLI wp2static options set useBasicAuth $USEBASICAUTH
+  $WPCLI wp2static options set basicAuthUser $BASICAUTHUSER
+  $WPCLI wp2static options set basicAuthPassword $BASICAUTHPASS
 
-# rm existing theme files
-rm -Rf wp-content/themes/diagnostic-theme-for-wp2static
+  # quick test
+  $WPCLI wp2static diagnostics
 
-# install theme for running diagnostics
-$WPCLI theme install https://github.com/leonstafford/diagnostic-theme-for-wp2static/archive/master.zip --activate
+  # rm existing theme files
+  rm -Rf wp-content/themes/diagnostic-theme-for-wp2static
 
-# generate an archive
-$WPCLI wp2static generate
+  # install theme for running diagnostics
+  $WPCLI theme install https://github.com/leonstafford/diagnostic-theme-for-wp2static/archive/master.zip --activate
 
-# pipe generate time into a TXT file and have this loaded by the theme via JS...
+  # generate an archive
+  $WPCLI wp2static generate
 
-# this allows for some general benchmarking/comparison across hosts
+  # pipe generate time into a TXT file and have this loaded by the theme via JS...
 
-# test deploy
-$WPCLI wp2static deploy --test
+  # this allows for some general benchmarking/comparison across hosts
 
-# deploy (to folder "/mystaticsite/" if no existing options set)
-$WPCLI wp2static deploy
+  # test deploy
+  $WPCLI wp2static deploy --test
+
+  # deploy (to folder "/mystaticsite/" if no existing options set)
+  $WPCLI wp2static deploy
+}
+
+# determine if script needs to run
+
+# look for a lastknowncommit file in $HOME
+if [ ! -f $HOME/last_commit ]; then
+    echo "No commit history found, running build and deploy"
+    build_and_deploy
+    exit 0
+else
+  # get latest public commit in WP2Static repo
+  curl -i "https://api.github.com/repos/leonstafford/wp2static/commits/HEAD" 2>/dev/null | grep sha | head -n 1 > $HOME/latest_commit
+
+  # compare the 2, if there's a change, overwrite 
+  # lastcommit with latest commit and run the script
+  DIFF=$(diff $HOME/last_commit $HOME/latest_commit) 
+
+  if [ "$DIFF" != "" ] 
+  then
+      echo "A new commit has been detected, running script"
+      mv $HOME/latest_commit $HOME/last_commit 
+      build_and_deploy
+      exit 0
+  fi
+fi
+
+
+
