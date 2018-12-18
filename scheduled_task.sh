@@ -1,16 +1,22 @@
 #!/bin/bash
+. ./.env
 
 cd $WP2STATICSCRIPTSDIR
 
 # read deploy key and site url from env vars
-. ./.env
 
 cd $WPDIR
 
-WPCLI = "$(which wp) $WPCMDAPPEND"
+WPCLI="$(which wp) $WPCMDAPPEND"
 
 # remove previous version, while preserving settings.
-$WPCLI plugin deactivate --uninstall wordpress-static-html-plugin
+
+NEEDTOREMOVE=$($WPCLI plugin is-installed wordpress-static-html-plugin)
+
+if [ -z "$NEEDTOREMOVE"];
+then
+  $WPCLI plugin deactivate --uninstall wordpress-static-html-plugin
+fi
 
 # install latest development version
 $WPCLI plugin install https://github.com/leonstafford/wp2static/archive/master.zip
