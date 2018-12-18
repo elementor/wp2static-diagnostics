@@ -24,3 +24,4 @@ Runs on every new commit to [https://github.com/leonstafford/wp2static](https://
  - `WP2STATICSCRIPTSDIR`
  - `NETLIFYSITEID`
  - `NETLIFYACCESSTOKEN`
+ - allow web user to run WP-CLI
