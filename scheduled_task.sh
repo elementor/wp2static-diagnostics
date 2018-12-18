@@ -13,7 +13,7 @@ function build_and_deploy {
   # run WP-CLI cmds from WordPress root
   cd $WPDIR
 
-  WPCLI="$(which wp) $WPCMDAPPEND"
+  WPCLI="$WPCLIPATH"
 
   # remove previous version, while preserving settings.
   # TODO: returns error code 1 if fails, need to avoid that or CRON chokes
