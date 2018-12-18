@@ -68,6 +68,10 @@ function build_and_deploy {
 
   # deploy (to folder "/mystaticsite/" if no existing options set)
   $WPCLI wp2static deploy
+
+  # save last_commit after a successful deploy
+  curl -i "https://api.github.com/repos/leonstafford/wp2static/commits/HEAD" 2>/dev/null | grep sha | head -n 1 > $HOME/last_commit
+
 }
 
 # determine if script needs to run
@@ -75,8 +79,6 @@ function build_and_deploy {
 # look for a lastknowncommit file in $HOME
 if [ ! -f $HOME/last_commit ]; then
     echo "No commit history found, saving latest commit & running build and deploy"
-
-    curl -i "https://api.github.com/repos/leonstafford/wp2static/commits/HEAD" 2>/dev/null | grep sha | head -n 1 > $HOME/last_commit
 
     build_and_deploy
     exit 0
