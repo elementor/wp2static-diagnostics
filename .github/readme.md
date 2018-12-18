@@ -21,6 +21,7 @@ Runs on every new commit to [https://github.com/leonstafford/wp2static](https://
  - `git clone https://github.com/leonstafford/wp2static-diagnostics.git`
  - cp `.env` file to `.env-SAMPLE` and set variables
  - allow web user to run WP-CLI
+ - set mail, ie postfix to send to local user
 
 # Scheduling the detect and build task
 
