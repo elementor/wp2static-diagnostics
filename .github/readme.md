@@ -29,3 +29,7 @@ Runs on every new commit to [https://github.com/leonstafford/wp2static](https://
 # Scheduling the detect and build task
 
  - `/bin/bash /path/to/scheduled_task.sh`
+
+# In action
+
+[![asciicast](https://asciinema.org/a/217395.svg)](https://asciinema.org/a/217395)
