@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# read deploy key and site url from env vars
+cd $WP2STATICSCRIPTSDIR
 
+# read deploy key and site url from env vars
 . ./.env
 
+cd $WPDIR
 
 # remove previous version, while preserving settings.
 wp plugin deactivate --uninstall wordpress-static-html-plugin
