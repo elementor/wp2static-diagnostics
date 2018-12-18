@@ -37,8 +37,8 @@ function build_and_deploy {
   $WPCLI wp2static options set selected_deployment_option 'netlify'
   $WPCLI wp2static options set netlifySiteID $NETLIFYSITEID
   $WPCLI wp2static options set netlifyPersonalAccessToken $NETLIFYACCESSTOKEN
-  $WPCLI wp2static options set baseUrl https://$NETLIFYSITEID
-  $WPCLI wp2static options set baseUrl-netlify https://$NETLIFYSITEID
+  $WPCLI wp2static options set baseUrl https://$NETLIFYSITEID.netlify.com
+  $WPCLI wp2static options set baseUrl-netlify https://$NETLIFYSITEID.netlify.com
   $WPCLI wp2static options set useBasicAuth $USEBASICAUTH
   $WPCLI wp2static options set basicAuthUser $BASICAUTHUSER
   $WPCLI wp2static options set basicAuthPassword $BASICAUTHPASS
