@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# read deploy key and site url from env vars
+
+. ./.env
+
+env | grep NETLIFY
+
+exit 1
+
 # remove previous version, while preserving settings.
 wp plugin deactivate --uninstall wordpress-static-html-plugin
 
@@ -14,9 +22,7 @@ wp plugin activate wordpress-static-html-plugin
 
 # set options for Netlify deploy
 
-# read deploy key and site url from env vars
 
-source ./.env
 
 # quick test
 wp wp2static diagnostics
