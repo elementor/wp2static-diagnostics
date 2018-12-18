@@ -25,13 +25,13 @@ mv wp-content/plugins/wp2static wp-content/plugins/wordpress-static-html-plugin
 $WPCLI plugin activate wordpress-static-html-plugin
 
 # set options for Netlify deploy
-$WPCLI wp2static option netlifySiteID $NETLIFYSITEID
-$WPCLI wp2static option netlifyPersonalAccessToken $NETLIFYACCESSTOKEN
-$WPCLI wp2static option baseUrl https://$NETLIFYSITEID
-$WPCLI wp2static option baseUrl-netlify https://$NETLIFYSITEID
-$WPCLI wp2static option useBasicAuth $USEBASICAUTH
-$WPCLI wp2static option basicAuthUser $BASICAUTHUSER
-$WPCLI wp2static option basicAuthPassword $BASICAUTHPASS
+$WPCLI wp2static options netlifySiteID $NETLIFYSITEID
+$WPCLI wp2static options netlifyPersonalAccessToken $NETLIFYACCESSTOKEN
+$WPCLI wp2static options baseUrl https://$NETLIFYSITEID
+$WPCLI wp2static options baseUrl-netlify https://$NETLIFYSITEID
+$WPCLI wp2static options useBasicAuth $USEBASICAUTH
+$WPCLI wp2static options basicAuthUser $BASICAUTHUSER
+$WPCLI wp2static options basicAuthPassword $BASICAUTHPASS
 
 # quick test
 $WPCLI wp2static diagnostics
