@@ -25,17 +25,20 @@ mv wp-content/plugins/wp2static wp-content/plugins/wordpress-static-html-plugin
 $WPCLI plugin activate wordpress-static-html-plugin
 
 # set options for Netlify deploy
-$WPCLI wp2static options selected_deployment_option 'netlify'
-$WPCLI wp2static options netlifySiteID $NETLIFYSITEID
-$WPCLI wp2static options netlifyPersonalAccessToken $NETLIFYACCESSTOKEN
-$WPCLI wp2static options baseUrl https://$NETLIFYSITEID
-$WPCLI wp2static options baseUrl-netlify https://$NETLIFYSITEID
-$WPCLI wp2static options useBasicAuth $USEBASICAUTH
-$WPCLI wp2static options basicAuthUser $BASICAUTHUSER
-$WPCLI wp2static options basicAuthPassword $BASICAUTHPASS
+$WPCLI wp2static options set selected_deployment_option 'netlify'
+$WPCLI wp2static options set netlifySiteID $NETLIFYSITEID
+$WPCLI wp2static options set netlifyPersonalAccessToken $NETLIFYACCESSTOKEN
+$WPCLI wp2static options set baseUrl https://$NETLIFYSITEID
+$WPCLI wp2static options set baseUrl-netlify https://$NETLIFYSITEID
+$WPCLI wp2static options set useBasicAuth $USEBASICAUTH
+$WPCLI wp2static options set basicAuthUser $BASICAUTHUSER
+$WPCLI wp2static options set basicAuthPassword $BASICAUTHPASS
 
 # quick test
 $WPCLI wp2static diagnostics
+
+# rm existing theme files
+rm -Rf wp-content/themes/diagnostic-theme-for-wp2static
 
 # install theme for running diagnostics
 $WPCLI theme install https://github.com/leonstafford/diagnostic-theme-for-wp2static/archive/master.zip --activate
