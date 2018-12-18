@@ -20,6 +20,7 @@ function build_and_deploy {
 
   # rm plugin dir if exists
   rm -Rf $WPDIR/wp-content/plugins/wp2static
+  rm -Rf $WPDIR/wp-content/plugins/wordpress-static-html-plugin
 
   # install latest development version
   $WPCLI plugin install https://github.com/leonstafford/wp2static/archive/master.zip
