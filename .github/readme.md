@@ -6,9 +6,9 @@ Runs on every new commit to [https://github.com/leonstafford/wp2static](https://
 
 # Current hosts
 
-|Deployed site|Provider|   |   |   |
+|Deployed site|Provider|Theme|Plugins|Notes|
 |---|---|---|---|---|
-|[wp2static-vultr1.netlify.com](https://wp2static-vultr1.netlify.com)|[Vultr](https://www.vultr.com/)|   |   |   |
+|[wp2static-vultr1.netlify.com](https://wp2static-vultr1.netlify.com)|[Vultr](https://www.vultr.com/)|WP2Static Diagnostics|Akismet<br/>Hello Dolly<br/>WP2Static|   |
 |   |   |   |   |   |
 |   |   |   |   |   |
 
@@ -19,11 +19,7 @@ Runs on every new commit to [https://github.com/leonstafford/wp2static](https://
  - disable pwd login
  - clone this repo to root (via https):
  - `git clone https://github.com/leonstafford/wp2static-diagnostics.git`
- - create .env file in project `cp .env-SAMPLE .env`, with following:
- - `WPDIR`
- - `WP2STATICSCRIPTSDIR`
- - `NETLIFYSITEID`
- - `NETLIFYACCESSTOKEN`
+ - cp `.env` file to `.env-SAMPLE` and set variables
  - allow web user to run WP-CLI
 
 # Scheduling the detect and build task
