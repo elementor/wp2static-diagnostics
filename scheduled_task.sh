@@ -7,12 +7,10 @@ function build_and_deploy {
   # change to this script's dir
   cd "${0%/*}"
 
+  # read deploy key and site url from env vars
   . ./.env
 
-  cd $WP2STATICSCRIPTSDIR
-
-  # read deploy key and site url from env vars
-
+  # run WP-CLI cmds from WordPress root
   cd $WPDIR
 
   WPCLI="$(which wp) $WPCMDAPPEND"
