@@ -90,6 +90,8 @@ else
       mv $HOME/latest_commit $HOME/last_commit 
       build_and_deploy
       exit 0
+  else
+      echo "No new commits since last check. Audi 5000"
   fi
 fi
 
