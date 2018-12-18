@@ -25,3 +25,7 @@ Runs on every new commit to [https://github.com/leonstafford/wp2static](https://
  - `NETLIFYSITEID`
  - `NETLIFYACCESSTOKEN`
  - allow web user to run WP-CLI
+
+# Scheduling the detect and build task
+
+ - `/bin/bash /path/to/scheduled_task.sh`
