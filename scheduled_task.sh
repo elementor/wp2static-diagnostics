@@ -12,6 +12,9 @@ WPCLI="$(which wp) $WPCMDAPPEND"
 # remove previous version, while preserving settings.
 $WPCLI plugin deactivate --uninstall wordpress-static-html-plugin
 
+# rm plugin dir if exists
+rm -Rf $WPDIR/wp-content/plugins/wp2static
+
 # install latest development version
 $WPCLI plugin install https://github.com/leonstafford/wp2static/archive/master.zip
 
