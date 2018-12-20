@@ -25,7 +25,17 @@ Runs on every new commit to [https://github.com/leonstafford/wp2static](https://
 
 # Scheduling the detect and build task
 
+ - `crontab -e`
+```
+# check for WP2Static updates every n mins
+*/1 * * * * /bin/bash /root/wp2static-diagnostics/scheduled_task.sh
+```
+
  - `/bin/bash /path/to/scheduled_task.sh`
+
+# Monitor on host
+
+` tail -f /var/log/syslog /root/cronlog.log /var/mail/root`
 
 # In action
 
