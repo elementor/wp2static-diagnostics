@@ -15,6 +15,12 @@ function build_and_deploy {
 
   WPCLI="$WPCLIPATH"
 
+  # rm existing theme files
+  rm -Rf wp-content/themes/diagnostic-theme-for-wp2static
+
+  # install theme for running diagnostics (needed before plugin)
+  $WPCLI theme install https://github.com/leonstafford/diagnostic-theme-for-wp2static/archive/master.zip --activate
+
   # remove previous version, while preserving settings.
   # TODO: returns error code 1 if fails, need to avoid that or CRON chokes
   #$WPCLI plugin deactivate --uninstall wordpress-static-html-plugin
@@ -49,12 +55,6 @@ function build_and_deploy {
 
   # quick test
   $WPCLI wp2static diagnostics
-
-  # rm existing theme files
-  rm -Rf wp-content/themes/diagnostic-theme-for-wp2static
-
-  # install theme for running diagnostics
-  $WPCLI theme install https://github.com/leonstafford/diagnostic-theme-for-wp2static/archive/master.zip --activate
 
   # generate an archive
   $WPCLI wp2static generate
