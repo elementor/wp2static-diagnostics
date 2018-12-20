@@ -66,7 +66,7 @@ function build_and_deploy {
   cp wp-content/uploads/exports_data.txt wp-content/uploads/latest-export/exports_data.txt
   LATEST_ARCHIVE=$(cat wp-content/uploads/WP-STATIC-CURRENT-ARCHIVE.txt)
 
-  zip -u $LATEST_ARCHIVE.zip wp-content/uploads/exports_data.txt
+  zip -u ${LATEST_ARCHIVE%?}.zip wp-content/uploads/exports_data.txt
 
   # deploy (to folder "/mystaticsite/" if no existing options set)
   $WPCLI wp2static deploy
