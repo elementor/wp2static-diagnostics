@@ -63,8 +63,6 @@ function build_and_deploy {
   echo "$(date +%s),$DURATION" >> exports_data.txt
 
   # copy exports_data into latest archive zip
-  cp exports_data.txt wp-content/uploads/latest-export/exports_data.txt
-
   LATEST_ARCHIVE=$(cat wp-content/uploads/WP-STATIC-CURRENT-ARCHIVE.txt)
 
   zip -u ${LATEST_ARCHIVE%?}.zip exports_data.txt
