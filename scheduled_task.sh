@@ -63,7 +63,7 @@ function build_and_deploy {
   echo "$(date +%s),$DURATION" >> wp-content/uploads/exports_data.txt
 
   # copy exports_data into latest archive
-  cp wp-content/uploads/exports_data.txt wp-content/uploads/latest-export/wp-content/uploads/
+  cp wp-content/uploads/exports_data.txt wp-content/uploads/latest-export/exports_data.txt
 
   # test deploy
   $WPCLI wp2static deploy --test
