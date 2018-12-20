@@ -17,6 +17,7 @@ Runs on every new commit to [https://github.com/leonstafford/wp2static](https://
 
  - basic auth
  - disable pwd login
+ - ensure `zip` present
  - clone this repo to root (via https):
  - `git clone https://github.com/leonstafford/wp2static-diagnostics.git`
  - cp `.env` file to `.env-SAMPLE` and set variables
