@@ -57,11 +57,13 @@ function build_and_deploy {
   $WPCLI wp2static diagnostics
 
   # generate an archive
-  $WPCLI wp2static generate
+  DURATION=$($WPCLI wp2static generate | tail -n 1 | cut -d' ' -f 7)
 
-  # pipe generate time into a TXT file and have this loaded by the theme via JS...
+  # pipe date and export duration into TXT file and load  by the theme via JS...
+  echo "date +%s,$DURATION" >> wp-content/uploads/exports_data.txt
 
-  # this allows for some general benchmarking/comparison across hosts
+  # copy exports_data into latest archive
+  cp wp-content/uploads/exports_data.txt wp-content/uploads/latest-export/wp-content/uploads/
 
   # test deploy
   $WPCLI wp2static deploy --test
