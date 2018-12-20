@@ -60,7 +60,7 @@ function build_and_deploy {
   DURATION=$($WPCLI wp2static generate | tail -n 1 | cut -d' ' -f 7)
 
   # pipe date and export duration into TXT file and load  by the theme via JS...
-  echo "date +%s,$DURATION" >> wp-content/uploads/exports_data.txt
+  echo "$(date +%s),$DURATION" >> wp-content/uploads/exports_data.txt
 
   # copy exports_data into latest archive
   cp wp-content/uploads/exports_data.txt wp-content/uploads/latest-export/wp-content/uploads/
