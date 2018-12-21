@@ -9,6 +9,7 @@ Runs on every new commit to [https://github.com/leonstafford/wp2static](https://
 |Deployed site|Provider|Theme|Plugins|Notes|
 |---|---|---|---|---|
 |[wp2static-vultr1.netlify.com](https://wp2static-vultr1.netlify.com)|[Vultr](https://www.vultr.com/)|WP2Static Diagnostics|Akismet<br/>Hello Dolly<br/>WP2Static|   |
+|[wp2static-digitalocean1.netlify.com](https://wp2static-digitalocean1.netlify.com/)|[DigitalOcean](https://www.digitalocean.com/)|WP2Static Diagnostics|Akismet<br/>Hello Dolly<br/>LiteSpeed Cache<br/>WP fail2ban<br/>advanced-cache.php<br/>object-cache.php<br/>|   |
 |   |   |   |   |   |
 |   |   |   |   |   |
 
